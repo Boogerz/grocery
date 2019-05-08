@@ -16,24 +16,38 @@ class SimpleList extends Component {
   constructor(props) {
     super(props);
     /*  Type your code here*/
-
+      this.state={data: this._addKeysToList(initialList)}
       this.checkfunction = this.checkFunction.bind(this);
+      this._addKeysToList = this._addKeysToList.bind(this);
   }
 
   checkFunction (item) {
-/*  Type your code here*/
+    let tempData = this.state.data.map(i => {
+      if (item.description === i.description) {
+        i.gotten = !i.gotten;
+      }
+      return i;
+    });
+    this.setState({ data: tempData });
+
   }
 
   _renderItem = ({item}) => {
-
     return(
-/*  Type your code here*/
+      <CheckBox
+          title={item.description}
+          onPress={() => {this.checkFunction(item);}}
+          checked={item.gotten}
+          />
   );
   };
 
   _addKeysToList = shopList => {
-
-    /*  Type your code here*/
+    // assigns a unique key based on the field listed
+// in this case it is the author field
+    return shopList.map(shopList => {
+  `   return Object.assign(shopList, { key: shopList.description });
+    });
   };
 
   render() {
